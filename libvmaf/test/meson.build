@@ -34,8 +34,22 @@ test_predict = executable('test_predict',
 
 test_feature_extractor = executable('test_feature_extractor',
     ['test.c', 'test_feature_extractor.c',
-     '../src/feature/feature_extractor.c'],
+     '../src/feature/feature_extractor.c',
+     '../src/feature/feature_collector.c',
+     '../src/feature/integer_psnr.c',
+     '../src/feature/integer_ssim.c'],
     include_directories : [libvmaf_inc, test_inc, '../src/'],
+)
+
+test_context = executable('test_context',
+    ['test.c', 'test_context.c', '../src/libvmaf.rc.c',
+     '../src/picture.c',
+     '../src/mem.c',
+     '../src/feature/feature_extractor.c',
+     '../src/feature/feature_collector.c',
+     '../src/feature/integer_psnr.c',
+     '../src/feature/integer_ssim.c'],
+    include_directories : [libvmaf_inc, test_inc],
 )
 
 test('test_picture', test_picture)
@@ -43,3 +57,4 @@ test('test_feature_collector', test_feature_collector)
 test('test_model', test_model)
 test('test_predict', test_predict)
 test('test_feature_extractor', test_feature_extractor)
+test('test_context', test_context)
